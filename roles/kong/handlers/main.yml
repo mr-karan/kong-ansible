@@ -1,0 +1,21 @@
+---
+- name: restart kong
+  service:
+      name: kong
+      state: restarted
+
+- name: reload kong
+  service:
+      name: kong
+      state: reloaded
+
+- name: start kong
+  service:
+      name: kong
+      state: started
+      enabled: yes
+
+- name: stop kong
+  service:
+      name: kong
+      state: stopped

@@ -1,0 +1,11 @@
+---
+#
+# Playbook to install the Cassandra and Kong
+
+- hosts: "{{control_host}}"
+  remote_user: "{{control_user}}"
+  become: yes
+  roles:
+    - role: java
+    - role: cassandra
+    - role: kong

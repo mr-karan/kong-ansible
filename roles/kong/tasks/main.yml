@@ -1,0 +1,24 @@
+---
+# Role to install kong (Takes ideas from https://docs.konghq.com/install/ubuntu/)
+
+- name: Install kong dependencies
+  apt:
+      name: "{{ packages }}"
+  vars:
+      packages:
+          - openssl
+          - libpcre3
+          - procps
+          - perl
+
+- name: Install kong as package
+  apt:
+      deb: "https://bintray.com/kong/kong-community-edition-deb/download_file?file_path=dists%2Fkong-community-edition-{{kong_version}}.bionic.all.deb"
+
+- name: Copy the Kong systemd service file
+  template:
+      src: kong.service.j2
+      dest: /etc/systemd/system/kong.service
+      owner: ubuntu
+      group: ubuntu
+      mode: 0644

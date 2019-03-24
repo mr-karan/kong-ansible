@@ -1,0 +1,21 @@
+---
+- name: restart cassandra
+  systemd:
+    daemon_reload: true
+    name: cassandra
+    state: restarted
+
+- name: reload cassandra
+  systemd:
+    name: cassandra
+    state: reloaded
+
+- name: start cassandra
+  systemd:
+    name: cassandra
+    state: start
+
+- name: stop cassandra
+  systemd:
+    name: cassandra
+    state: stop

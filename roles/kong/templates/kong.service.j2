@@ -1,0 +1,15 @@
+[Unit]
+Description=manages node exporter as a service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{control_user}}
+Group={{control_user}}
+Type=simple
+ExecStart=/usr/local/bin/kong start -c /etc/kong/kong.conf
+ExecStop=/usr/local/bin/kong stop -c /etc/kong/kong.conf
+ExecReload=/usr/local/bin/kong reload -c /etc/kong/kong.conf
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+---
+# Role to install cassandra (Takes ideas from http://cassandra.apache.org/doc/latest/getting_started/installing.html)
+
+- name: Import the cassandra GPG Key
+  apt_key:
+    url: https://www.apache.org/dist/cassandra/KEYS
+    state: present
+
+- name: Install apt-transport-https
+  apt:
+   name: apt-transport-https
+   update_cache: yes
+
+- name: Add cassandra APT repo to source list
+  apt_repository:
+   repo: deb http://www.apache.org/dist/cassandra/debian 36x main
+   state: present
+   filename: /etc/apt/sources.list.d/cassandra.sources #.list extension is automatically added by ansible
+
+- name: Install cassandra
+  apt:
+   name: cassandra
+   update_cache: yes
+  notify:
+  - restart cassandra
